@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Home</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome (outlined icons) -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<script>
+let currentSlideIndex = 0;
+let autoSlideTimer;
+const totalSlides = 5;
+
+function changeSlide(n) {
+    currentSlideIndex = (currentSlideIndex + n + totalSlides) % totalSlides;
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const track = document.querySelector('.carousel-track');
+    
+    slides.forEach((slide, index) => {
+        slide.classList.remove('center');
+    });
+    
+    slides[currentSlideIndex].classList.add('center');
+    
+    // Calculate translation to keep center item centered
+    const slideWidth = 180;
+    const gap = 25;
+    const offset = -currentSlideIndex * (slideWidth + gap);
+    track.style.transform = `translateX(calc(${offset}px + (100vw - 320px) / 2))`;
+}
+
+function autoSlide() {
+    changeSlide(1);
+}
+
+function resetAutoSlide() {
+    clearInterval(autoSlideTimer);
+    autoSlideTimer = setInterval(autoSlide, 4000);
+}
+
+function openModal(src) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    modal.style.display = 'flex';
+    modalImg.src = src;
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('imageModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Start autoplay when page loads
+window.addEventListener('load', function() {
+    updateCarousel();
+    autoSlideTimer = setInterval(autoSlide, 4000);
+});
+</script>
+
+<header>
+    <h1>My Portfolio</h1>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About Me</a>
+        <a href="#">Educational Background</a>
+        <a href="#">Skills</a>
+        <a href="#">Projects & Capstone</a>
+        <a href="#">OJT / Internship</a>
+        <a href="#">Certifications</a>
+        <a href="#">Reflection</a>
+        <a href="#">Resume & Contact</a>
+        <a href="#">Ethics</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="info">
+        <h2>Hello, I'm <span class="highlight">April Rose M. Ebrado</span></h2>
+          <h4>Bachelor of Science in Information Technology</h4>
+        <h3>Aspiring IT Student & UI|UX Designer</h3>
+
+        <p>
+            Welcome to my portfolio!  
+            I love designing clean websites while learning new technologies every day.
+        </p>
+
+        <!-- Social Icons -->
+        <div class="socials">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <div class="profile-container">
+        <img src="Profile.png" alt="Profile Photo" class="profile-pic">
+    </div>
+</section>
+
+<!-- About Me Section -->
+<section class="about-me" id="about">
+    <div class="section-container">
+        <div class="section-header">
+            <h2>About Me</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p>I am a Bachelor of Science in Information Technology student with a strong interest in web development, particularly in designing website UI/UX. Throughout my academic journey, I have developed skills in creating user-centered designs, building responsive web interfaces, and applying design principles to improve usability and user experience. I enjoy translating ideas into visually appealing and functional designs, and I am eager to continuously learn and grow as an aspiring web developer in the IT industry.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Educational Background Section -->
+<section class="educational-background" id="education">
+    <div class="education-wrapper">
+        <div class="section-header">
+            <h2>Educational Background</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="education-content">
+            <div class="education-item">
+                <h3 class="education-level">Elementary</h3>
+                <p class="school-name">Sangi Elementary School</p>
+                <p class="school-year">2010 - 2016</p>
+            </div>
+
+            <div class="education-item">
+                <h3 class="education-level">Junior High School</h3>
+                <p class="school-name">Toledo National Vocational School</p>
+                <p class="school-year">2016 - 2020</p>
+            </div>
+
+            <div class="education-item">
+                <h3 class="education-level">Senior High School</h3>
+                <p class="school-name">Leaton School, Inc.</p>
+                <p class="school-track">HUMSS</p>
+                <p class="school-year">2020 - 2022</p>
+            </div>
+
+            <div class="education-item">
+                <h3 class="education-level">College</h3>
+                <p class="school-name">Consolatrix College of Toledo City, Inc.</p>
+                <p class="school-track">Bachelor of Science in Information Technology (BSIT)</p>
+                <p class="school-year">2022 - 2026</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="skills" id="skills">
+    <div class="skills-wrapper">
+        <div class="section-header">
+            <h2>Technical Skills</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="skills-content">
+            <div class="skills-category">
+                <h3 class="category-title">Programming Languages</h3>
+                <ul class="skills-list">
+                    <li>JavaScript <span class="skill-level">(Intermediate)</span></li>
+                    <li>TypeScript <span class="skill-level">(Basic)</span></li>
+                </ul>
+            </div>
+
+            <div class="skills-category">
+                <h3 class="category-title">Web Development</h3>
+                <ul class="skills-list">
+                    <li>HTML, CSS</li>
+                    <li>Next.js</li>
+                    <li>React.js</li>
+                    <li>Responsive Web Design</li>
+                    <li>Progressive Web App (PWA)</li>
+                </ul>
+            </div>
+
+            <div class="skills-category">
+                <h3 class="category-title">Databases</h3>
+                <ul class="skills-list">
+                    <li>MongoDB</li>
+                    <li>MySQL</li>
+                </ul>
+            </div>
+
+            <div class="skills-category">
+                <h3 class="category-title">Tools & Platforms</h3>
+                <ul class="skills-list">
+                    <li>GitHub</li>
+                    <li>Figma (UI/UX Design)</li>
+                    <li>Visual Studio Code</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects & Capstone Section -->
+<section class="projects" id="projects">
+    <div class="projects-wrapper">
+        <div class="section-header">
+            <h2>Projects & Capstone</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="project-item">
+            <div class="project-info">
+                <h3 class="project-title">Consolatrix Connect</h3>
+                <p class="project-role"><strong>Role:</strong> Full-Stack Developer</p>
+                <p class="project-tech"><strong>Technologies Used:</strong> Next.js, Node.js, TypeScript, MongoDB, PWA</p>
+                
+                <div class="project-description">
+                    <p>Consolatrix Connect is a web-based platform designed to connect users with educational resources and support services for students and staff. It provides a secure login system where users can access personalized dashboards, interact with various modules, and manage their academic information. The system enhances communication and collaboration within the school environment by integrating key features that streamline tasks and improve overall user experience.</p>
+                </div>
+
+                <div class="project-links">
+                    <a href="https://github.com/Goldenrose2004/New-ConsoaltrixConnect.git" target="_blank" class="github-link">
+                        <i class="fa-brands fa-github"></i> View GitHub Repository
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-media">
+                <div class="media-container">
+                    <div class="screenshots-section">
+                        <h4>Screenshots</h4>
+                        <div class="carousel-container">
+                            <div class="carousel-wrapper">
+                                <div class="carousel-track">
+                                    <img src="1.png" alt="Consolatrix Connect - Screenshot 1" class="carousel-slide" onclick="openModal(this.src)">
+                                    <img src="2.png" alt="Consolatrix Connect - Screenshot 2" class="carousel-slide" onclick="openModal(this.src)">
+                                    <img src="3.png" alt="Consolatrix Connect - Screenshot 3" class="carousel-slide" onclick="openModal(this.src)">
+                                    <img src="4.png" alt="Consolatrix Connect - Screenshot 4" class="carousel-slide" onclick="openModal(this.src)">
+                                    <img src="5.png" alt="Consolatrix Connect - Screenshot 5" class="carousel-slide" onclick="openModal(this.src)">
+                                </div>
+                            </div>
+                            
+                            <button class="carousel-btn carousel-btn-prev" onclick="changeSlide(-1); resetAutoSlide()">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-btn carousel-btn-next" onclick="changeSlide(1); resetAutoSlide()">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                            
+                            <div class="carousel-indicators">
+                                <span class="indicator active" onclick="currentSlide(0); resetAutoSlide()"></span>
+                                <span class="indicator" onclick="currentSlide(1); resetAutoSlide()"></span>
+                                <span class="indicator" onclick="currentSlide(2); resetAutoSlide()"></span>
+                                <span class="indicator" onclick="currentSlide(3); resetAutoSlide()"></span>
+                                <span class="indicator" onclick="currentSlide(4); resetAutoSlide()"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-video-section">
+                        <h4>Demo Video</h4>
+                        <div class="video-placeholder">
+                            <p>Demo video will be embedded here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+
+<!-- Modal for Full-Size Images -->
+<div id="imageModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" alt="Full Size Screenshot">
+</div>
