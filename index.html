@@ -12,42 +12,9 @@
 </head>
 <body>
 
+<script src="carousel.js"></script>
+
 <script>
-let currentSlideIndex = 0;
-let autoSlideTimer;
-const totalSlides = 5;
-
-function changeSlide(n) {
-    currentSlideIndex = (currentSlideIndex + n + totalSlides) % totalSlides;
-    updateCarousel();
-}
-
-function updateCarousel() {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const track = document.querySelector('.carousel-track');
-    
-    slides.forEach((slide, index) => {
-        slide.classList.remove('center');
-    });
-    
-    slides[currentSlideIndex].classList.add('center');
-    
-    // Calculate translation to keep center item centered
-    const slideWidth = 180;
-    const gap = 25;
-    const offset = -currentSlideIndex * (slideWidth + gap);
-    track.style.transform = `translateX(calc(${offset}px + (100vw - 320px) / 2))`;
-}
-
-function autoSlide() {
-    changeSlide(1);
-}
-
-function resetAutoSlide() {
-    clearInterval(autoSlideTimer);
-    autoSlideTimer = setInterval(autoSlide, 4000);
-}
-
 function openModal(src) {
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
@@ -66,27 +33,21 @@ window.onclick = function(event) {
         modal.style.display = 'none';
     }
 }
-
-// Start autoplay when page loads
-window.addEventListener('load', function() {
-    updateCarousel();
-    autoSlideTimer = setInterval(autoSlide, 4000);
-});
 </script>
 
 <header>
     <h1>My Portfolio</h1>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About Me</a>
-        <a href="#">Educational Background</a>
-        <a href="#">Skills</a>
-        <a href="#">Projects & Capstone</a>
-        <a href="#">OJT / Internship</a>
-        <a href="#">Certifications</a>
-        <a href="#">Reflection</a>
-        <a href="#">Resume & Contact</a>
-        <a href="#">Ethics</a>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#education">Educational Background</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects & Capstone</a>
+        <a href="#ojt">OJT / Internship</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#reflection">Reflection</a>
+        <a href="#contact">Resume & Contact</a>
+        <a href="#ethics">Ethics</a>
     </nav>
 </header>
 
@@ -100,14 +61,6 @@ window.addEventListener('load', function() {
             Welcome to my portfolio!  
             I love designing clean websites while learning new technologies every day.
         </p>
-
-        <!-- Social Icons -->
-        <div class="socials">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-github"></i></a>
-            <a href="#"><i class="fa-regular fa-envelope"></i></a>
-        </div>
     </div>
 
     <div class="profile-container">
@@ -239,6 +192,9 @@ window.addEventListener('load', function() {
                     <a href="https://github.com/Goldenrose2004/New-ConsoaltrixConnect.git" target="_blank" class="github-link">
                         <i class="fa-brands fa-github"></i> View GitHub Repository
                     </a>
+                    <a href="https://youtu.be/bhIrvc11EOg" target="_blank" class="demo-video-link">
+                        <i class="fa-solid fa-play"></i> Demo Video
+                    </a>
                 </div>
             </div>
 
@@ -247,40 +203,150 @@ window.addEventListener('load', function() {
                     <div class="screenshots-section">
                         <h4>Screenshots</h4>
                         <div class="carousel-container">
-                            <div class="carousel-wrapper">
-                                <div class="carousel-track">
-                                    <img src="1.png" alt="Consolatrix Connect - Screenshot 1" class="carousel-slide" onclick="openModal(this.src)">
-                                    <img src="2.png" alt="Consolatrix Connect - Screenshot 2" class="carousel-slide" onclick="openModal(this.src)">
-                                    <img src="3.png" alt="Consolatrix Connect - Screenshot 3" class="carousel-slide" onclick="openModal(this.src)">
-                                    <img src="4.png" alt="Consolatrix Connect - Screenshot 4" class="carousel-slide" onclick="openModal(this.src)">
-                                    <img src="5.png" alt="Consolatrix Connect - Screenshot 5" class="carousel-slide" onclick="openModal(this.src)">
-                                </div>
+                            <div class="screenshots-grid">
+                                <img src="1.png" alt="Consolatrix Connect - Screenshot 1" onclick="openModal(this.src)">
+                                <img src="2.png" alt="Consolatrix Connect - Screenshot 2" onclick="openModal(this.src)">
+                                <img src="3.png" alt="Consolatrix Connect - Screenshot 3" onclick="openModal(this.src)">
+                                <img src="4.png" alt="Consolatrix Connect - Screenshot 4" onclick="openModal(this.src)">
+                                <img src="5.png" alt="Consolatrix Connect - Screenshot 5" onclick="openModal(this.src)">
                             </div>
                             
-                            <button class="carousel-btn carousel-btn-prev" onclick="changeSlide(-1); resetAutoSlide()">
+                            <button class="carousel-btn carousel-btn-prev" onclick="rotateCarousel('prev'); resetAutoSlide()">
                                 <i class="fa-solid fa-chevron-left"></i>
                             </button>
-                            <button class="carousel-btn carousel-btn-next" onclick="changeSlide(1); resetAutoSlide()">
+                            <button class="carousel-btn carousel-btn-next" onclick="rotateCarousel('next'); resetAutoSlide()">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </button>
-                            
-                            <div class="carousel-indicators">
-                                <span class="indicator active" onclick="currentSlide(0); resetAutoSlide()"></span>
-                                <span class="indicator" onclick="currentSlide(1); resetAutoSlide()"></span>
-                                <span class="indicator" onclick="currentSlide(2); resetAutoSlide()"></span>
-                                <span class="indicator" onclick="currentSlide(3); resetAutoSlide()"></span>
-                                <span class="indicator" onclick="currentSlide(4); resetAutoSlide()"></span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="demo-video-section">
-                        <h4>Demo Video</h4>
-                        <div class="video-placeholder">
-                            <p>Demo video will be embedded here</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OJT / Internship Section -->
+<section class="ojt" id="ojt">
+    <div class="ojt-wrapper">
+        <div class="section-header">
+            <h2>OJT / Internship</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="ojt-content">
+            <div class="ojt-item">
+                <h3>Company Name:</h3>
+                <p>Cebu III Electric Cooperative, Inc.</p>
+            </div>
+
+            <div class="ojt-item">
+                <h3>Duration:</h3>
+                <p>486 hours</p>
+            </div>
+
+            <div class="ojt-item">
+                <h3>Position:</h3>
+                <p>IT Intern</p>
+            </div>
+
+            <div class="ojt-item">
+                <h3>Tasks & Responsibilities:</h3>
+                <ul>
+                    <li>Assigned to encode supplemental reports accurately</li>
+                    <li>Assigned to encode, organize, and document complaints and accomplishments</li>
+                    <li>Assigned to provide assistance in office paperwork and carry out administrative errands as needed</li>
+                    <li>Assigned to encode and maintain ISO reports using Microsoft Office applications</li>
+                    <li>Tasked to assist in gathering data for the Engineering Annual Budget, applying Microsoft Excel formulas with accuracy</li>
+                </ul>
+            </div>
+
+            <div class="ojt-item">
+                <h3>Tools Used:</h3>
+                <p>Microsoft Excel, Microsoft Word, Cebcos</p>
+            </div>
+
+            <div class="ojt-reflection">
+                <h3>📝 OJT Reflection</h3>
+                <p>My On-the-Job Training experience at Cebu III Electric Cooperative, Inc. provided valuable exposure to a professional office environment. Through tasks such as report encoding, ISO documentation, data gathering for budget preparation, and administrative support, I was able to strengthen my skills in documentation, data accuracy, and the effective use of Microsoft Office applications. This experience also enhanced my sense of responsibility, attention to detail, and professionalism, preparing me for future roles in the IT field and the corporate workplace.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Certifications Section -->
+<section class="certifications" id="certifications">
+    <div class="certifications-wrapper">
+        <div class="section-header">
+            <h2>Certifications</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="certifications-content">
+            <p>Certifications and achievements will be displayed here.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Reflection Section -->
+<section class="reflection" id="reflection">
+    <div class="reflection-wrapper">
+        <div class="section-header">
+            <h2>Reflection / Learning Journey</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="reflection-content">
+            <p>Being an IT student has been a journey of growth and discovery, where each class and project challenged me to develop new skills and think critically. My On-the-Job Training allowed me to apply my knowledge in real-world tasks, such as managing data, encoding reports, and assisting with office operations, while improving my technical and professional abilities.</p>
+            
+            <p>Through these experiences, I learned the importance of accuracy, organization, and attention to detail, as well as effective communication, time management, and problem-solving. I also developed the ability to continuously adapt to new technologies and tools, strengthening my adaptability, resilience, and work ethic. These lessons have deepened my passion for IT and prepared me to face future challenges confidently while continuing to grow as an IT professional.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Resume & Contact Section -->
+<section class="contact" id="contact">
+    <div class="contact-wrapper">
+        <div class="section-header">
+            <h2>Resume & Contact</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="contact-content">
+            <div class="contact-item">
+                <h3>Downloadable PDF Resume</h3>
+                <p><a href="#" target="_blank" class="contact-link">Download Resume</a></p>
+            </div>
+
+            <div class="contact-item">
+                <h3>Email</h3>
+                <p><a href="mailto:ebradoaprilrose@gmail.com" class="contact-link">ebradoaprilrose@gmail.com</a></p>
+            </div>
+
+            <div class="contact-item">
+                <h3>LinkedIn Profile</h3>
+                <p><a href="#" target="_blank" class="contact-link">View LinkedIn Profile</a></p>
+            </div>
+
+            <div class="contact-item">
+                <h3>GitHub</h3>
+                <p><a href="https://github.com/Goldenrose2004" target="_blank" class="contact-link">https://github.com/Goldenrose2004</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ethics Section -->
+<section class="ethics" id="ethics">
+    <div class="ethics-wrapper">
+        <div class="section-header">
+            <h2>Ethics</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="ethics-content">
+            <div class="ethics-item">
+                <h3>Declaration & Ethics</h3>
+                <p>I hereby affirm that all information, projects, and materials presented in this e-portfolio are entirely my original work. All sources, references, and contributions from others have been properly acknowledged. This portfolio has been prepared in strict adherence to principles of academic integrity, ethical conduct, and data privacy standards.</p>
             </div>
         </div>
     </div>

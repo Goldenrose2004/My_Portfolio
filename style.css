@@ -12,6 +12,10 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #000;
 }
 
 header h1 {
@@ -118,11 +122,7 @@ nav a:hover {
 .section-container {
     max-width: 900px;
     width: 100%;
-    background-color: #1a1a1a;
-    border: 2px solid #D4AF37;
-    border-radius: 12px;
     padding: 60px;
-    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
 }
 
 .section-header {
@@ -139,8 +139,8 @@ nav a:hover {
 }
 
 .header-line {
-    width: 100px;
-    height: 3px;
+    width: 200px;
+    height: 4px;
     background-color: #D4AF37;
     margin: 20px auto 0;
     border-radius: 2px;
@@ -380,6 +380,29 @@ nav a:hover {
     font-size: 18px;
 }
 
+.demo-video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background-color: #1a1a1a;
+    color: #D4AF37;
+    text-decoration: none;
+    border: 2px solid #D4AF37;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.demo-video-link:hover {
+    background-color: #D4AF37;
+    color: #000;
+}
+
+.demo-video-link i {
+    font-size: 18px;
+}
+
 .project-media {
     display: flex;
     flex-direction: column;
@@ -397,6 +420,10 @@ nav a:hover {
     flex-direction: column;
 }
 
+.screenshots-section {
+    margin-top: 40px;
+}
+
 .screenshots-section h4,
 .demo-video-section h4 {
     font-size: 16px;
@@ -407,67 +434,81 @@ nav a:hover {
     letter-spacing: 1px;
 }
 
-/* Carousel Styles */
+.demo-video-section {
+    border: 2px solid #D4AF37;
+    border-radius: 6px;
+    padding: 20px;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
+}
+
+.demo-video-section:hover {
+    background-color: #D4AF37;
+    color: #000;
+}
+
+.demo-video-section:hover h4 {
+    color: #000;
+}
+
+.demo-video-section:hover .video-placeholder {
+    color: #000;
+}
+
+/* Carousel Container */
 .carousel-container {
     position: relative;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    padding: 20px 0;
 }
 
-.carousel-wrapper {
+/* Screenshots Grid */
+.screenshots-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: -5px;
     width: 100%;
-    height: 320px;
-    overflow: visible;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 20px 0;
+    flex-wrap: wrap;
 }
 
-.carousel-track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%;
-    gap: 25px;
-    align-items: center;
-    justify-content: center;
-    min-width: max-content;
-}
-
-.carousel-slide {
-    min-width: 180px;
-    width: 180px;
-    height: 220px;
-    object-fit: cover;
-    border: 3px solid #D4AF37;
+.screenshots-grid img {
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    object-fit: cover;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.5;
     filter: brightness(0.6);
-    flex-shrink: 0;
 }
 
-.carousel-slide.center {
-    min-width: 320px;
+/* Center image (3rd image) */
+.screenshots-grid img:nth-child(3) {
     width: 320px;
     height: 320px;
     opacity: 1;
     filter: brightness(1);
     box-shadow: 0 12px 40px rgba(212, 175, 55, 0.5);
-    border-width: 3px;
 }
 
-.carousel-slide:hover {
-    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+/* Outermost images (1st and 5th) - most behind */
+.screenshots-grid img:nth-child(1),
+.screenshots-grid img:nth-child(5) {
+    width: 100px;
+    height: 120px;
 }
 
+/* Middle side images (2nd and 4th) */
+.screenshots-grid img:nth-child(2),
+.screenshots-grid img:nth-child(4) {
+    width: 180px;
+    height: 220px;
+}
+
+/* Carousel Buttons */
 .carousel-btn {
-    display: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -478,6 +519,7 @@ nav a:hover {
     height: 45px;
     border-radius: 50%;
     cursor: pointer;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
@@ -497,27 +539,10 @@ nav a:hover {
 .carousel-btn-next {
     right: 15px;
 }
-
-.carousel-indicators {
-    display: none;
-    justify-content: center;
-    gap: 10px;
-    padding: 15px 0;
-    background-color: #1a1a1a;
 }
 
-.indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #555;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.indicator:hover {
-    background-color: #D4AF37;
+.screenshots-grid img:hover {
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
     border-color: #D4AF37;
 }
 
@@ -603,4 +628,263 @@ nav a:hover {
 .modal-close:hover {
     color: #fff;
     transform: scale(1.2);
+}
+/* OJT / Internship Section */
+.ojt {
+    background-color: #000;
+    padding: 80px 50px;
+    min-height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.ojt-wrapper {
+    width: 100%;
+}
+
+.ojt-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.ojt-item {
+    padding-left: 30px;
+    border-left: 3px solid #D4AF37;
+}
+
+.ojt-item h3 {
+    font-size: 18px;
+    color: #D4AF37;
+    margin: 0 0 15px 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.ojt-item p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.ojt-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ojt-item li {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+}
+
+.ojt-item li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #D4AF37;
+    font-size: 18px;
+}
+
+.ojt-reflection {
+    padding-left: 30px;
+    border-left: 4px solid #D4AF37;
+}
+
+.ojt-reflection h3 {
+    font-size: 18px;
+    color: #D4AF37;
+    margin: 0 0 15px 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.ojt-reflection p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin: 0;
+    line-height: 1.8;
+}
+
+/* Certifications Section */
+.certifications {
+    background-color: #000;
+    padding: 80px 50px;
+    min-height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 120px;
+}
+
+.certifications-wrapper {
+    width: 100%;
+}
+
+.certifications-content {
+    margin-top: 30px;
+    padding-left: 30px;
+    border-left: 3px solid #D4AF37;
+}
+
+.certifications-content p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+}
+
+/* Reflection Section */
+.reflection {
+    background-color: #000;
+    padding: 80px 50px;
+    min-height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 120px;
+}
+
+.reflection-wrapper {
+    width: 100%;
+}
+
+.reflection-content {
+    margin-top: 30px;
+    padding-left: 30px;
+    border-left: 3px solid #D4AF37;
+}
+
+.reflection-content p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin: 0 0 20px 0;
+    line-height: 1.8;
+}
+
+.reflection-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Resume & Contact Section */
+.contact {
+    background-color: #000;
+    padding: 80px 50px;
+    min-height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 120px;
+}
+
+.contact-wrapper {
+    width: 100%;
+}
+
+.contact-content {
+    margin-top: 30px;
+    padding-left: 30px;
+    border-left: 3px solid #D4AF37;
+}
+
+.contact-content p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+}
+
+/* Ethics Section */
+.ethics {
+    background-color: #000;
+    padding: 80px 50px;
+    min-height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 120px;
+}
+
+.ethics-wrapper {
+    width: 100%;
+}
+
+.ethics-content {
+    margin-top: 30px;
+    padding-left: 30px;
+    border-left: 3px solid #D4AF37;
+}
+
+.ethics-content p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+}
+
+.ethics-item {
+    padding: 40px 30px;
+    background-color: rgba(212, 175, 55, 0.05);
+    border-radius: 8px;
+    border-left: 4px solid #D4AF37;
+}
+
+.ethics-item h3 {
+    font-size: 20px;
+    color: #D4AF37;
+    margin: 0 0 20px 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.ethics-item p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin: 0;
+    line-height: 1.8;
+}
+
+/* Contact Items */
+.contact-item {
+    margin-bottom: 35px;
+    padding-bottom: 0;
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-item h3 {
+    font-size: 18px;
+    color: #D4AF37;
+    margin: 0 0 12px 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.contact-item p {
+    font-size: 16px;
+    color: #b0b0b0;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.contact-link {
+    color: #b0b0b0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.contact-link:hover {
+    color: #D4AF37;
+    text-decoration: underline;
 }
