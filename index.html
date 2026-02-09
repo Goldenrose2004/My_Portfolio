@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Home</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome (outlined icons) -->
     <link rel="stylesheet" 
@@ -33,12 +34,42 @@ window.onclick = function(event) {
         modal.style.display = 'none';
     }
 }
+
+// Smoothly center sections when clicking navbar links or loading a hash
+document.addEventListener('DOMContentLoaded', function() {
+    const centerSection = (hash) => {
+        if (!hash) return;
+        const el = document.querySelector(hash);
+        if (el) {
+            // slight delay ensures layout has settled (useful after refresh)
+            setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
+        }
+    };
+
+    // Intercept in-page nav clicks and center the section
+    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    history.pushState(null, '', href);
+                }
+            }
+        });
+    });
+
+    // If page loads with a hash, center it
+    centerSection(location.hash);
+});
 </script>
 
 <header>
     <h1>My Portfolio</h1>
     <nav>
-        <a href="#home">Home</a>
+        <a href="#home" class="active">Home</a>
         <a href="#about">About Me</a>
         <a href="#education">Educational Background</a>
         <a href="#skills">Skills</a>
@@ -59,14 +90,17 @@ window.onclick = function(event) {
 
         <p>
             Welcome to my portfolio!  
-            I love designing clean websites while learning new technologies every day.
         </p>
     </div>
 
-    <div class="profile-container">
-        <img src="Profile.png" alt="Profile Photo" class="profile-pic">
+    <div class="profile-container no-card">
+        <div class="avatar-wrapper">
+            <img src="Profile.png" alt="Profile Photo" class="profile-pic avatar-ring">
+        </div>
     </div>
 </section>
+
+
 
 <!-- About Me Section -->
 <section class="about-me" id="about">
@@ -277,12 +311,42 @@ window.onclick = function(event) {
 <section class="certifications" id="certifications">
     <div class="certifications-wrapper">
         <div class="section-header">
-            <h2>Certifications</h2>
+            <h2>Certifications & Trainings</h2>
             <div class="header-line"></div>
         </div>
         
         <div class="certifications-content">
-            <p>Certifications and achievements will be displayed here.</p>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <img src="css certificate.pdf.jpg" alt="CSS Certificate" onclick="openModal(this.src)">
+                    <p>CSS Certificate</p>
+                </div>
+                
+                <div class="cert-card">
+                    <img src="problem_solving_basic certificate.pdf.jpg" alt="Java Basic Certificate" onclick="openModal(this.src)">
+                    <p>Java Basic Certificate</p>
+                </div>
+                
+                <div class="cert-card">
+                    <img src="problem_solving_basic certificate.pdf.jpg" alt="Node.js Basic Certificate" onclick="openModal(this.src)">
+                    <p>Node.js Basic Certificate</p>
+                </div>
+                
+                <div class="cert-card">
+                    <img src="react_basic certificate.pdf.jpg" alt="React Basic Certificate" onclick="openModal(this.src)">
+                    <p>React Basic Certificate</p>
+                </div>
+                
+                <div class="cert-card">
+                    <img src="sql_basic certificate.pdf.jpg" alt="SQL Basic Certificate" onclick="openModal(this.src)">
+                    <p>SQL Basic Certificate</p>
+                </div>
+                
+                <div class="cert-card">
+                    <img src="Cebeco_Certificate.jpg" alt="OJT Certificate" onclick="openModal(this.src)">
+                    <p>OJT Certificate</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -314,7 +378,7 @@ window.onclick = function(event) {
         <div class="contact-content">
             <div class="contact-item">
                 <h3>Downloadable PDF Resume</h3>
-                <p><a href="#" target="_blank" class="contact-link">Download Resume</a></p>
+                <p><a href="Resume_Ebrado.pdf" download class="contact-link">Resume.pdf</a></p>
             </div>
 
             <div class="contact-item">
